@@ -1,0 +1,5 @@
+{
+    "testServer": "", // server id
+    "clientId": "", // bot id
+    "devs": [""] // any developer ids go here
+}
