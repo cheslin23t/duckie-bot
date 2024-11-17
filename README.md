@@ -12,7 +12,8 @@ Old Discord Bot that I may or may not update later.
 - **package.json**
   - Updated [package.json](https://github.com/bruvzz/duckie-bot/blob/main/package.json)
 
-> __Uses discord.js 14.11.0__
+> [!IMPORTANT]
+This bot uses discord.js 14.11.0
 
 # Package Installations:
 
