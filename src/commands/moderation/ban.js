@@ -2,8 +2,8 @@ const {
   Client,
   Interaction,
   ApplicationCommandOptionType,
-  PermissionFlagsBits,
   EmbedBuilder,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
@@ -12,93 +12,73 @@ module.exports = {
    * @param {Client} client
    * @param {Interaction} interaction
    */
-
   callback: async (client, interaction) => {
-    const targetUserId = interaction.options.get("target-user").value;
-    const reason =
-      interaction.options.get("reason")?.value || "No reason provided";
+      try {
+          await interaction.deferReply();
 
-    await interaction.deferReply();
+          if (!interaction.member.permissions.has(PermissionFlagsBits.BanMembers)) {
+              return await interaction.editReply("You don't have permission to ban members.");
+          }
 
-    const targetUser = await interaction.guild.members.fetch(targetUserId);
+          const userId = interaction.options.getString("userid");
+          const reason = interaction.options.getString("reason") || "N/A";
 
-    const embed = new EmbedBuilder()
-      .setTitle("Success")
-      .setColor("#4ea554")
-      .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
-      .setTimestamp()
-      .addFields(
-        {
-          name: "User Banned:",
-          value: `${targetUser} (${targetUser.id})`,
-          inline: true,
-        },
-        {
-          name: "Moderator:",
-          value: `${interaction.user} (${interaction.user.id})`,
-          inline: true,
-        },
-        {
-          name: "Reason:",
-          value: `\`${reason}\``,
-          inline: true,
-        },
-      );
+          if (!userId) {
+              return await interaction.editReply("Please provide a valid user ID.");
+          }
 
-    if (!targetUser) {
-      await interaction.editReply("That user doesn't exist in this server.");
-      return;
-    }
+          const user = await client.users.fetch(userId).catch(() => null);
 
-    if (targetUser.id === interaction.guild.ownerId) {
-      await interaction.editReply(
-        "You can't ban that user because they're the server owner."
-      );
-      return;
-    }
+          if (!user) {
+              return await interaction.editReply("Could not find a user with that ID.");
+          }
 
-    const targetUserRolePosition = targetUser.roles.highest.position; // Highest role of the target user
-    const requestUserRolePosition = interaction.member.roles.highest.position; // Highest role of the user running the cmd
-    const botRolePosition = interaction.guild.members.me.roles.highest.position; // Highest role of the bot
+          await interaction.guild.members.ban(user.id, { reason });
 
-    if (targetUserRolePosition >= requestUserRolePosition) {
-      await interaction.editReply(
-        "You can't ban that user because they have the same/higher role than you."
-      );
-      return;
-    }
+          const embed = new EmbedBuilder()
+              .setColor("#4ea554")
+              .setTitle("Success")
+              .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+              .setTimestamp()
+              .addFields(
+                  {
+                      name: "User Banned:",
+                      value: `<@${user.id}> (${user.id})`,
+                      inline: true,
+                  },
+                  {
+                      name: "Moderator:",
+                      value: `${interaction.user} (${interaction.user.id})`,
+                      inline: true,
+                  },
+                  {
+                      name: "Reason:",
+                      value: `\`${reason}\``,
+                      inline: true,
+                  }
+              );
 
-    if (targetUserRolePosition >= botRolePosition) {
-      await interaction.editReply(
-        "I can't ban that user because they have the same/higher role than me."
-      );
-      return;
-    }
-
-    // Ban the targetUser
-    try {
-      await targetUser.ban({ reason });
-      await interaction.editReply({ embeds: [embed] });
-    } catch (error) {
-      console.log(`There was an error when banning: ${error}`);
-    }
+          await interaction.editReply({ embeds: [embed] });
+      } catch (error) {
+          console.error("Error banning user:", error);
+          await interaction.editReply("An error occurred while trying to ban the user.");
+      }
   },
 
   name: "ban",
-  description: "Bans a member from this server.",
+  description: "Ban a member from the server.",
   options: [
-    {
-      name: "target-user",
-      description: "The user you want to ban.",
-      type: ApplicationCommandOptionType.Mentionable,
-      required: true,
-    },
-    {
-      name: "reason",
-      description: "The reason you want to ban.",
-      type: ApplicationCommandOptionType.String,
-    },
+      {
+          name: "userid",
+          description: "The ID of the user to ban.",
+          type: ApplicationCommandOptionType.String,
+          required: true,
+      },
+      {
+          name: "reason",
+          description: "The reason for banning the user.",
+          type: ApplicationCommandOptionType.String,
+          required: false,
+      },
   ],
-  permissionsRequired: [PermissionFlagsBits.BanMembers],
-  botPermissions: [PermissionFlagsBits.BanMembers],
 };
