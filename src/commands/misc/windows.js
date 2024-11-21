@@ -1,6 +1,4 @@
 const { Client, Interaction, EmbedBuilder } = require("discord.js");
-// For Node.js < 18, uncomment the following line:
-// const fetch = require("node-fetch");
 
 module.exports = {
     /**
@@ -13,9 +11,12 @@ module.exports = {
 
             const response = await fetch("https://weao.xyz/api/versions/current");
             const obj = await response.json();
+
+            const response2 = await fetch("https://weao.xyz/api/versions/future");
+            const obj2 = await response2.json();
                 
             const embed = new EmbedBuilder()
-            .setDescription("# Windows Information")
+            .setDescription("## Windows Information")
             .setColor("#4ea554")
             .setTimestamp()
             .addFields(
@@ -26,6 +27,14 @@ module.exports = {
                 {
                     name: "Date/Time Released:",
                     value: obj["WindowsDate"],
+                },
+                {
+                    name: "Windows Version Hash (Future):",
+                    value: obj2["Windows"],
+                },
+                {
+                    name: "Date/Time Released (Future):",
+                    value: obj2["WindowsDate"],
                 }
             );
 
