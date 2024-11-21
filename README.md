@@ -1,16 +1,19 @@
 Old Discord Bot that I may or may not update later.
 
 # Changelog:
-*Updated as of:* `November 16, 2024 // 11:00 PM [EDT]`
+*Updated as of:* `November 20, 2024 // 8:26 PM [EDT]`
 - **src/commands/misc/**
-  - Added [weao.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/weao.js)
-  - Added [windows.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/windows.js)
+  - Added [avatar.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/avatar.js)
+  - Added [membercount.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/membercount.js)
+  - Added [roles.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/roles.js)
+  - Added [serverinfo.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/serverinfo.js)
+  - Added [whois.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/whois.js)
+  - Updated [windows.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/windows.js)
 
 - **src/commands/moderation/**
-  - Added [untimeout.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/moderation/untimeout.js)
-
-- **package.json**
-  - Updated [package.json](https://github.com/bruvzz/duckie-bot/blob/main/package.json)
+  - Updated [ban.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/moderation/ban.js)
+  - Added [slowmode.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/moderation/slowmode.js)
+  - Added [unban.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/moderation/unban.js)
 
 > [!IMPORTANT]
 This bot uses discord.js 14.11.0
