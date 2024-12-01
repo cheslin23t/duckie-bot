@@ -1,16 +1,11 @@
 Old Discord Bot that I may or may not update later.
 
 # Changelog:
-*Updated as of:* `November 29, 2024 // 5:32 PM [EDT]`
+*Updated as of:* `November 30, 2024 // 10:21 PM [EDT]`
 - **src/commands/misc/**
-  - Added [uptime.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/uptime.js)
-
-- **src/commands/moderation/**
-  - Added [purge.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/moderation/purge.js)
-
- - **src/commands/fun/**
-   - Added `fun` folder.
-   - Added [rps.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/fun/rps.js)
+  - Added [help.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/help.js)
+  - Updated [serverinfo.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/serverinfo.js)
+  - Updated [windows.js](https://github.com/bruvzz/duckie-bot/blob/main/src/commands/misc/windows.js)
 
 > [!IMPORTANT]
 This bot uses discord.js 14.11.0
