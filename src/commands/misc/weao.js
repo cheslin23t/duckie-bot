@@ -25,7 +25,6 @@ module.exports = {
                 { name: "Wave", url: "https://weao.xyz/api/status/exploits/wave" },
                 { name: "Solara", url: "https://weao.xyz/api/status/exploits/solara" },
                 { name: "Seliware", url: "https://weao.xyz/api/status/exploits/seliware" },
-                { name: "Seliware", url: "https://weao.xyz/api/status/exploits/seliware" },
                 { name: "Rebel", url: "https://weao.xyz/api/status/exploits/rebel" },
             ];
 
