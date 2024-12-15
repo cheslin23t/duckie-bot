@@ -1,16 +1,46 @@
+const { Client, Interaction, EmbedBuilder } = require("discord.js");
+
 module.exports = {
-  name: "ping",
-  description: "Replies with the bot ping!",
-
+  /**
+   *
+   * @param {Client} client
+   * @param {Interaction} interaction
+   */
   callback: async (client, interaction) => {
-    await interaction.deferReply();
+    try {
+      const start = Date.now();
 
-    const reply = await interaction.fetchReply();
+      await interaction.deferReply();
 
-    const ping = reply.createdTimestamp - interaction.createdTimestamp;
+      const reply = await interaction.fetchReply();
+      const end = Date.now();
 
-    interaction.editReply(
-      `Pong! Client ${ping}ms | Websocket: ${client.ws.ping}ms`
-    );
+      const apiLatency = client.ws.ping;
+      const botLatency = end - start;
+
+      const embed = new EmbedBuilder()
+        .setColor("#4ea554")
+        .setTitle("Success")
+        .setDescription("Here's my current latency statistics:")
+        .addFields(
+          { name: "Bot Latency", value: `\`${botLatency}ms\``, inline: true },
+          { name: "API Latency", value: `\`${apiLatency}ms\``, inline: true }
+        )
+        .setFooter({
+          text: `Requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+        })
+        .setTimestamp();
+
+      await interaction.editReply({ embeds: [embed] });
+    } catch (error) {
+      console.error("Error handling ping command:", error);
+      await interaction.editReply({
+        content: "An error occurred while trying to calculate the ping.",
+      });
+    }
   },
+
+  name: "ping",
+  description: "Check the bot's latency and API latency.",
 };
