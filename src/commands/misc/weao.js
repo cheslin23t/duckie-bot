@@ -20,10 +20,13 @@ module.exports = {
             const robloxObj = await robloxResponse.json();
 
             const exploits = [
+                { name: "AWP.GG", url: "https://weao.xyz/api/status/exploits/awp.gg" },
                 { name: "Nihon", url: "https://weao.xyz/api/status/exploits/nihon" },
                 { name: "Synapse Z", url: "https://weao.xyz/api/status/exploits/synapse%20z" },
                 { name: "Wave", url: "https://weao.xyz/api/status/exploits/wave" },
+                { name: "Sirhurt", url: "https://weao.xyz/api/status/exploits/sirhurt" },
                 { name: "Solara", url: "https://weao.xyz/api/status/exploits/solara" },
+                { name: "Swift", url: "https://weao.xyz/api/status/exploits/swift" },
                 { name: "Seliware", url: "https://weao.xyz/api/status/exploits/seliware" },
                 { name: "Rebel", url: "https://weao.xyz/api/status/exploits/rebel" },
             ];
