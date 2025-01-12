@@ -1,6 +1,6 @@
 config.json
-.env
 .vscode
 .git
 node_modules/
 package-lock.json
+.env
